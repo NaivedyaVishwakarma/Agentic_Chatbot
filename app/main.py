@@ -42,7 +42,11 @@ def chat(request: ChatRequest):
         messages = _to_langchain_messages(request.history)
         messages.append(HumanMessage(content=request.message))
 
+        # result = run_agent(messages)
         result = run_agent(messages)
+        for message in result['messages']:
+            print("MESSAGE:", message)
+
         final_message = result['messages'][-1]
         answer = str(getattr(final_message, 'content', ''))
 

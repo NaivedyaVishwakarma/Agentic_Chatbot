@@ -74,11 +74,17 @@ def get_agent_graph():
     )
     model_with_tools = model.bind_tools(TOOLS)
 
-    def llm_call(state: MessagesState):
-        response = model_with_tools.invoke(
-            [SystemMessage(content=SYSTEM_PROMPT), *state['messages']]
-        )
-        return {'messages': [response]}
+    # def llm_call(state: MessagesState):
+    #     response = model_with_tools.invoke(
+    #         [SystemMessage(content=SYSTEM_PROMPT), *state['messages']]
+    #     )
+    #     return {'messages': [response]}
+def llm_call(state: MessagesState):
+    response = model_with_tools.invoke(
+        [SystemMessage(content=SYSTEM_PROMPT), *state['messages']]
+    )
+    print("LLM RESPONSE:", response)
+    return {'messages': [response]}
 
     builder = StateGraph(MessagesState)
     builder.add_node('llm', llm_call)
