@@ -13,27 +13,13 @@ jobs:
 
     steps:
       - name: Deploy backend service on Render
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
-          IMAGE_TAG: ${{ github.event.workflow_run.head_sha }}
         run: |
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/deploys" \
-            --header "Authorization: Bearer ${RENDER_API_KEY}" \
-            --header "Content-Type: application/json" \
-            --data "{\"imageUrl\":\"ghcr.io/naivedyavishwakarma/agentic-chatbot:${IMAGE_TAG}\"}"
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_BACKEND_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json"
 
       - name: Deploy UI service on Render
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_UI_SERVICE_ID }}
-          IMAGE_TAG: ${{ github.event.workflow_run.head_sha }}
         run: |
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            "https://api.render.com/v1/services/${RENDER_SERVICE_ID}/deploys" \
-            --header "Authorization: Bearer ${RENDER_API_KEY}" \
-            --header "Content-Type: application/json" \
-            --data "{\"imageUrl\":\"ghcr.io/naivedyavishwakarma/agentic-chatbot:${IMAGE_TAG}\"}"
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_UI_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json"
