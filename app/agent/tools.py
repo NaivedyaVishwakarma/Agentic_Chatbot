@@ -131,7 +131,7 @@ def get_current_time(timezone: str = 'Asia/Kolkata') -> str:
 def get_weather(city: str) -> str:
     # """Return current weather for a city using the public Open-Meteo geocoding and weather APIs."""
     """Return current weather and hourly weather forecast, including rain probability, for a city using the public Open-Meteo geocoding and weather APIs."""
-    
+
     city = city.strip()
     if not city:
         raise ValueError('City name is required.')
@@ -204,6 +204,13 @@ def get_weather(city: str) -> str:
         if tomorrow_probabilities
         else 'N/A'
     )
+
+    print("===== WEATHER TOOL DEBUG =====")
+    print("City:", resolved_name)
+    print("Tomorrow rain probability:", tomorrow_probability)
+    print("==============================")
+
+
 
     return (
         f'Current weather in {resolved_name}, {country}: '
