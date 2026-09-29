@@ -212,14 +212,23 @@ def get_weather(city: str) -> str:
 
 
 
+    # return (
+    #     f'Current weather in {resolved_name}, {country}: '
+    #     f"temperature {current.get('temperature_2m')} {units.get('temperature_2m', '°C')}, "
+    #     f"humidity {current.get('relative_humidity_2m')} {units.get('relative_humidity_2m', '%')}, "
+    #     f"wind speed {current.get('wind_speed_10m')} {units.get('wind_speed_10m', 'km/h')}. "
+    #     f'Chance of rain after approximately 3 hours: {probability_3h}%. '
+    #     f'Maximum chance of rain tomorrow: {tomorrow_probability}%.'
+    # )
     return (
-        f'Current weather in {resolved_name}, {country}: '
-        f"temperature {current.get('temperature_2m')} {units.get('temperature_2m', '°C')}, "
-        f"humidity {current.get('relative_humidity_2m')} {units.get('relative_humidity_2m', '%')}, "
-        f"wind speed {current.get('wind_speed_10m')} {units.get('wind_speed_10m', 'km/h')}. "
-        f'Chance of rain after approximately 3 hours: {probability_3h}%. '
-        f'Maximum chance of rain tomorrow: {tomorrow_probability}%.'
-    )
+    f"Current weather in {resolved_name}, {country}: "
+    f"temperature {current.get('temperature_2m')} {units.get('temperature_2m', '°C')}, "
+    f"humidity {current.get('relative_humidity_2m')} {units.get('relative_humidity_2m', '%')}, "
+    f"wind speed {current.get('wind_speed_10m')} {units.get('wind_speed_10m', 'km/h')}. "
+    f"Chance of rain after approximately 3 hours: {probability_3h}%. "
+    f"Maximum chance of rain tomorrow: {tomorrow_probability}%. "
+    f"[DEBUG: current_time={current_time}, hourly_points={len(times)}]"
+)
 
 
 TOOLS = [calculator, get_current_time, get_weather]
