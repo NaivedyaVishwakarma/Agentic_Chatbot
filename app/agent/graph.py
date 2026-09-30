@@ -94,13 +94,3 @@ def get_agent_graph():
 def run_agent(messages):
     graph = get_agent_graph()
     return graph.invoke({'messages': messages})
-# def run_agent(messages):
-#     graph = get_agent_graph()
-#     result = graph.invoke({'messages': messages})
-
-#     print("\n===== ALL MESSAGES =====")
-#     for message in result['messages']:
-#         print(type(message).__name__, "=>", getattr(message, 'content', ''))
-#     print("========================\n")
-
-#     return result
